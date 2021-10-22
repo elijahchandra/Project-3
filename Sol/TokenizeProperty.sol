@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.5.5;
 
 import "./RealEstateToken.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/Crowdsale.sol";
@@ -10,19 +10,19 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5
 // @TODO: Inherit the crowdsale contracts
 contract PropertyCoinSale is Crowdsale, MintedCrowdsale, CappedCrowdsale, TimedCrowdsale, RefundablePostDeliveryCrowdsale {
     // uint public fakenow = block.timestamp; @dev check fastforward function below
- 
+
     constructor(
-        // @TODO: Fill in the constructor parameters!
-        address payable wallet,
-        uint rate, // 1 TKNbit per wei or 1 TKN per Ether.
+        address payable beneficiary,
+        uint256 rate, // 1 TKNbit per wei or 1 TKN per Ether.
         uint goal, // Crowdsale goal of 10,000 wei
         uint cap, // Max 100,000 of wei accepted in the crowdsale.
         uint open,
         uint close,
+        uint totalSupply,
         RealEstateCoin token
     )
         // @TODO: Pass the constructor parameters to the crowdsale contracts.
-        Crowdsale (rate, wallet, token)
+        Crowdsale (rate, beneficiary, token)
         
         // Pass the constructor parameters to the refundable crowdsale contracts.
         RefundableCrowdsale (goal) 
@@ -30,14 +30,12 @@ contract PropertyCoinSale is Crowdsale, MintedCrowdsale, CappedCrowdsale, TimedC
         // Pass the constructor parameters to the capped crowdsale contracts. 
         CappedCrowdsale (cap) 
         
-        TimedCrowdsale (open, close) public
-        {
-            // constructor can be empty    
-        }
-    
-    // function fastforward() public {
-    //     fakenow = block.timestamp;
-    // } @dev function used to mine new block when using Ganache 
+        TimedCrowdsale (open, close) public{}
+        
+        
+    function tokenRate() public view returns(uint256) {
+        return rate;
+    }
 }
 
 contract PropertyCoinSaleDeployer {
@@ -49,21 +47,27 @@ contract PropertyCoinSaleDeployer {
         // @TODO: Fill in the constructor parameters!
         string memory name,
         string memory symbol,
+        uint totalSupply,
+        uint goal,
         address payable beneficiary // This address will receive all Ether raised by the contract
     )
         public
     {
+        // uint totalSupply = _totalSupply * (10**18);
+        uint rate = totalSupply / goal;
+        uint cap = goal;
+        
         // @TODO: create the RealEstateCoin and keep its address handy
         // @param name, symbol, initialSupply
-        RealEstateCoin token = new RealEstateCoin (name, symbol, 240000000000000000);
-        token_address = address(token);
+        RealEstateCoin token = new RealEstateCoin (name, symbol, 0);
+        property_token_address = address(token);
 
         // @TODO: create the PropertyCoinSale and tell it about the token, set the goal, and set the open and close times to now and now + 24 weeks.
-        PropertyCoinSale pupper_sale = new PropertyCoinSale(beneficiary, 1, 240000000000000000, 240000000000000000, now, now + 5 minutes, token);
-        token_sale_address = address(pupper_sale);
+        PropertyCoinSale property_sale = new PropertyCoinSale(beneficiary, rate, goal, cap, now, now + 4 weeks, totalSupply, token);
+        property_token_sale_address = address(property_sale);
 
         // make the PropertyCoinSale contract a minter, then have the PropertyCoinSaleDeployer renounce its minter role
-        token.addMinter(token_sale_address);
+        token.addMinter(property_token_sale_address);
         token.renounceMinter();
     }
     
