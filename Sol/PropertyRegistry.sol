@@ -12,8 +12,8 @@ contract PropertyRegistry {
     
     address public sale_deployer_address;
     
-    event PermissionGranted(address indexed account);
-    event PermissionRevoked(address indexed account);
+    event PermissionGranted(address account);
+    event PermissionRevoked(address account);
     
     Roles.Role private permissions;
     
@@ -29,10 +29,10 @@ contract PropertyRegistry {
         _;
     }
     
-    modifier onlyAuthorized() {
-        require(permissions.has(msg.sender), "Permission: Not approved");
-        _;
-    }
+    // modifier onlyAuthorized() {
+    //     require(permissions.has(msg.sender), "Permission: Not approved");
+    //     _;
+    // }
     
     function registerProperty(
         string memory propertyAddress, 
@@ -66,7 +66,6 @@ contract PropertyRegistry {
     
 
 }
-
 
 
 
