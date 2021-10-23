@@ -1,5 +1,7 @@
 pragma solidity ^0.5.5;
 
+// UNFINISHED
+
 import "./TokenizeProperty.sol";
 // import "../.deps/github/OpenZeppelin/openzeppelin-contracts/contracts/access/Roles.sol";
 
