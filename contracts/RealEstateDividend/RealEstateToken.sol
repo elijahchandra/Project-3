@@ -35,7 +35,7 @@ contract RealEstateCoin is ERC20, ERC20Detailed, ERC20Mintable {
         Allows renter to deposit their monthly rent.
         Loops through an array of Investors for the property and distributes dividends.
     **/
-    function depositRent() payable public {
+    function payRent() payable public {
         // uint totalRent = msg.value;
         uint points = msg.value/100;
 
