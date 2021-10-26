@@ -15,7 +15,6 @@ contract PropertyCoinSale is Crowdsale, MintedCrowdsale, CappedCrowdsale{
         address payable beneficiary,
         uint256 rate,
         uint cap,
-        uint maxSupply,
         RealEstateCoin token
     )
         //  Pass the constructor parameters to the crowdsale contracts.
