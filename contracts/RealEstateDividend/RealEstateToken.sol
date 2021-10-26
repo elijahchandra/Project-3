@@ -10,8 +10,9 @@ import "../.deps/github/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC2
 contract RealEstateCoin is ERC20, ERC20Detailed, ERC20Mintable {
     using SafeMath for uint;
     
+    address payabale beneficiary;
+    address payable walletAddress;
     uint public shares;
-    address payable public walletAddress;
     uint public maxSupply;
     uint public sharePercent;
     uint public amount;
@@ -19,12 +20,14 @@ contract RealEstateCoin is ERC20, ERC20Detailed, ERC20Mintable {
     constructor(
         string memory name,
         string memory symbol,
-        uint _maxSupply
+        uint _maxSupply,
+        address payable _beneficiary
     )
         ERC20Detailed(name, symbol, 18)
         public
     {
         maxSupply = _maxSupply;
+        beneficiary = _beneficiary
     } 
 
 
