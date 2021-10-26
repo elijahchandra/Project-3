@@ -13,18 +13,13 @@ contract PropertyCoinSaleDeployer {
         _owner = msg.sender;
     }
     
-    modifier onlyOwner() {
-        require(msg.sender == _owner, "You are not authorized to register property for a crowdsale.");
-        _;
-    }
-    
     function registerProperty(
         address payable beneficiary,
         string memory propertyName, 
         string memory tokenSymbol, 
         uint _maxSupply, 
         uint goal
-        ) public onlyOwner {
+        ) public authorizedOwner {
             
             uint maxSupply = _maxSupply * (10**18);
             uint rate = maxSupply / goal;
