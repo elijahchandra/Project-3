@@ -1,13 +1,7 @@
 pragma solidity >=0.5.5;
 
-// import "./RealEstateToken.sol";
 import "./TokenSale.sol";
-// import "./Permission.sol";
-// import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/Crowdsale.sol";
-// import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/emission/MintedCrowdsale.sol";
-// import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/validation/CappedCrowdsale.sol";
-// import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/validation/TimedCrowdsale.sol";
-// import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/distribution/RefundablePostDeliveryCrowdsale.sol";
+
 
 contract PropertyCoinSaleDeployer {
 
@@ -20,7 +14,7 @@ contract PropertyCoinSaleDeployer {
     }
     
     modifier onlyOwner() {
-        require(msg.sender == _owner, "You are not authorized to register propery for a crowdsale.");
+        require(msg.sender == _owner, "You are not authorized to register property for a crowdsale.");
         _;
     }
     
@@ -28,17 +22,17 @@ contract PropertyCoinSaleDeployer {
         address payable beneficiary,
         string memory propertyName, 
         string memory tokenSymbol, 
-        uint _totalSupply, 
+        uint _maxSupply, 
         uint goal
         ) public onlyOwner {
             
-            uint totalSupply = _totalSupply * (10**18);
-            uint rate = totalSupply / goal;
+            uint maxSupply = _maxSupply * (10**18);
+            uint rate = maxSupply / goal;
         
-            RealEstateCoin property_token = new RealEstateCoin(propertyName, tokenSymbol, 0);
+            RealEstateCoin property_token = new RealEstateCoin(propertyName, tokenSymbol, maxSupply);
             property_token_address = address(property_token);
         
-            PropertyCoinSale property_sale = new PropertyCoinSale(beneficiary, rate, goal, _totalSupply, /* goal, now, now + 1 hours, */property_token);
+            PropertyCoinSale property_sale = new PropertyCoinSale(beneficiary, rate, goal, maxSupply, /* goal, now, now + 1 hours, */property_token);
             property_token_sale_address = address(property_sale);
         
             property_token.addMinter(property_token_sale_address);
