@@ -7,68 +7,48 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5
 contract RealEstateCoin is ERC20, ERC20Detailed, ERC20Mintable {
     using SafeMath for uint;
     
-    // uint totalTokens;
-    uint totalRent;
+    uint public shares;
+    address payable public walletAddress;
+    uint public maxSupply;
+    uint public sharePercent;
+    uint public amount;
 
     constructor(
         string memory name,
         string memory symbol,
-        uint initial_supply
+        uint _maxSupply
     )
         ERC20Detailed(name, symbol, 18)
         public
     {
-        // constructor can stay empty
+        maxSupply = _maxSupply;
     } 
 
-    function depositRent() public payable {
-        totalRent = totalRent.add(msg.value);
-        uint perShareAmount = totalRent/100000000000000000000;
-        address payable walletAddress;
-        
+
+    /**
+        Allows renter to deposit their monthly rent.
+        Loops through an array of Investors for the property and distributes dividends.
+    **/
+    function depositRent() payable public {
+        // uint totalRent = msg.value;
+        uint points = msg.value/100;
+
         uint arrayLength = ERC20.investorsList.length;
         for (uint i = 0; i < arrayLength; i++) {
             
-            uint shares = ERC20._balances[ERC20.investorsList[i]];
+            shares = ERC20._balances[ERC20.investorsList[i]];
             
-            uint dividendAmount = shares.mul(perShareAmount);
+            sharePercent = shares * 100 / maxSupply; 
+        
+            amount = points * sharePercent;
             
             walletAddress = ERC20.investorsList[i];
             
-            walletAddress.transfer(dividendAmount);
-            
-            // return walletAddress;
+            walletAddress.transfer(amount);
         }
+    }
 
-    }
-    
-    function array() public view returns(uint) {
-        return ERC20.investorsList.length;
-    }
-    
-    function send() public payable {
-        uint arrayLength = ERC20.investorsList.length;
-        for (uint i = 0; i < arrayLength; i++) {
-            
-        address payable sendTo = ERC20.investorsList[i];
-            
-        sendTo.transfer(msg.value);
-        
-    }
-    
-    }
-    
-    function checkBalance(address to) public returns(bool) {
-        uint arrayLength = ERC20.investorsList.length;
-        for (uint i = 0; i < arrayLength; i++) {
-            uint shares = ERC20._balances[ERC20.investorsList[i]];
-            
-            transfer(to, shares);
-            
-        }
-        
-        return true;
-    }
+
 }
     
 
