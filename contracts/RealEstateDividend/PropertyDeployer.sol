@@ -29,10 +29,10 @@ contract PropertyCoinSaleDeployer {
             uint maxSupply = _maxSupply * (10**18);
             uint rate = maxSupply / goal;
         
-            RealEstateCoin property_token = new RealEstateCoin(propertyName, tokenSymbol, maxSupply);
+            RealEstateCoin property_token = new RealEstateCoin(propertyName, tokenSymbol, maxSupply, beneficiary);
             property_token_address = address(property_token);
         
-            PropertyCoinSale property_sale = new PropertyCoinSale(beneficiary, rate, goal, maxSupply, /* goal, now, now + 1 hours, */property_token);
+            PropertyCoinSale property_sale = new PropertyCoinSale(beneficiary, rate, goal, property_token);
             property_token_sale_address = address(property_sale);
         
             property_token.addMinter(property_token_sale_address);
