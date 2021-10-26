@@ -25,6 +25,11 @@ contract Permission {
         _;
     }
     
+    modifier authorizedOwner() {
+        require(permissions.bearer[msg.sender] == true, "Permission: You do not have permission to register property for crowdsale.");
+        _;
+    }
+    
     function _grantPermission(address account) onlyOwner external {
         require(account != address(0), "Entered zero address.");
         permissions.add(account);
@@ -37,13 +42,12 @@ contract Permission {
         emit PermissionRevoked(account);
     }
     
-    // function hasPermission(address account) external view returns(bool) {
-    //     return permissions.has(account);
-    // }
+    function hasPermission(address account) external view returns(bool) {
+        return permissions.has(account);
+    }
     
 
 }
-
 
 
 
