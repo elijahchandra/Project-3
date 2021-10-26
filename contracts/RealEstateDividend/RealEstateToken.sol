@@ -10,7 +10,7 @@ import "../.deps/github/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC2
 contract RealEstateCoin is ERC20, ERC20Detailed, ERC20Mintable {
     using SafeMath for uint;
     
-    address payabale beneficiary;
+    address payable beneficiary;
     address payable walletAddress;
     uint public shares;
     uint public maxSupply;
