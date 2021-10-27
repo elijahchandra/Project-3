@@ -9,10 +9,10 @@ contract RealEstateCoin is ERC20, ERC20Detailed, ERC20Mintable {
     
     address payable beneficiary;
     address payable walletAddress;
-    uint public shares;
-    uint public maxSupply;
-    uint public sharePercent;
-    uint public amount;
+    uint shares;
+    uint maxSupply;
+    uint sharePercent;
+    uint amount;
 
     constructor(
         string memory name,
