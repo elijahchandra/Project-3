@@ -13,6 +13,8 @@ contract RealEstateCoin is ERC20, ERC20Detailed, ERC20Mintable {
     uint maxSupply;
     uint sharePercent;
     uint amount;
+    
+    event DividendPayout(address wallet, uint dividend);
 
     constructor(
         string memory name,
@@ -51,6 +53,8 @@ contract RealEstateCoin is ERC20, ERC20Detailed, ERC20Mintable {
             amount = points * sharePercent;
             walletAddress = investorsList[i];
             walletAddress.transfer(amount);
+            
+            emit DividendPayout(walletAddress, amount);
         }
     }
 }
