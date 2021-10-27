@@ -1,9 +1,9 @@
 pragma solidity >=0.5.5;
 
 import "./TokenSale.sol";
+import "./Permission.sol";
 
-
-contract PropertyCoinSaleDeployer {
+contract PropertyCoinSaleDeployer is Permission{
 
     address public property_token_sale_address;
     address public property_token_address;
@@ -33,33 +33,4 @@ contract PropertyCoinSaleDeployer {
             property_token.addMinter(property_token_sale_address);
             property_token.renounceMinter();
     }
-    
 }
-        
-        
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    

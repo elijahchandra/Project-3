@@ -1,13 +1,10 @@
 
 pragma solidity >=0.5.5;
 
-import "./RealEstateToken.sol";
-// import "../.deps/github/OpenZeppelin/openzeppelin-contracts/contracts/crowdsale/Crowdsale.sol";
-// import "../.deps/github/OpenZeppelin/openzeppelin-contracts/contracts/crowdsale/emission/MintedCrowdsale.sol";
-// import "../.deps/github/OpenZeppelin/openzeppelin-contracts/contracts/crowdsale/validation/CappedCrowdsale.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/Crowdsale.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/emission/MintedCrowdsale.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/validation/CappedCrowdsale.sol";
+import "./RealEstateToken.sol";
 
 contract PropertyCoinSale is Crowdsale, MintedCrowdsale, CappedCrowdsale{
     

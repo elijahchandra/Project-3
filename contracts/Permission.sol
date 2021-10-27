@@ -1,6 +1,5 @@
 pragma solidity >=0.5.5;
 
-// import "../.deps/github/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC20/ERC20Mintable.sol";
 import "./RealEstateToken.sol";
 
 // @dev This contract allows investors to registerProperty for a crowdsale. 
@@ -21,7 +20,7 @@ contract Permission {
     }
     
     modifier onlyOwner() {
-        require(msg.sender == _owner, "You are not authorized to register propery for a crowdsale.");
+        require(msg.sender == _owner, "You are not authorized.");
         _;
     }
     
@@ -45,18 +44,4 @@ contract Permission {
     function hasPermission(address account) external view returns(bool) {
         return permissions.has(account);
     }
-    
-
 }
-
-
-
-
-
-
-
-
-
-
-
-

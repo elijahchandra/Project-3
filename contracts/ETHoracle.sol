@@ -1,4 +1,5 @@
 pragma solidity ^0.4.25;
+
 import "https://github.com/provable-things/ethereum-api/blob/master/provableAPI_0.4.25.sol";
 
 contract ETHoracle is usingProvable {
