@@ -30,7 +30,7 @@ contract RealEstateCoin is ERC20, ERC20Detailed, ERC20Mintable {
     mapping (address => bool) private investor;
     address payable [] private investorsList;
     
-    function registerForDividends() private {
+    function registerForDividends() public {
         require(balanceOf(msg.sender) > 0, "You are not an investor.");
         require(investor[msg.sender] != true, "Address already confirmed.");
         investor[msg.sender] = true;
