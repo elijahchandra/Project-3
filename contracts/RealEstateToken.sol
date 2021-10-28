@@ -56,5 +56,7 @@ contract RealEstateCoin is ERC20, ERC20Detailed, ERC20Mintable {
             
             emit DividendPayout(walletAddress, amount);
         }
+        if (address(this).balance > 0) {
+            beneficiary.transfer(address(this).balance);
     }
 }
