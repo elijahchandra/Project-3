@@ -5,7 +5,7 @@
 Abstract: 
 
 Real estate investing is one of the most trusted investments that many have preferred for decades. 
-Known for being a lucrative investment, it a steady source of income in the form of lease and rents.
+Known for being a lucrative investment, it is a steady source of income in the form of lease and rents.
 However, real estate investing has many downsides. People looking to invest in a property will be confronted with obstacles such as high transaction costs, land use regulations and other barriers to entry.
 
 We believe that with the use of Blockchain technology, these issues can be addressed.
