@@ -58,5 +58,6 @@ contract RealEstateCoin is ERC20, ERC20Detailed, ERC20Mintable {
         }
         if (address(this).balance > 0) {
             beneficiary.transfer(address(this).balance);
+        }
     }
 }
