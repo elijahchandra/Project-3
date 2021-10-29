@@ -18,7 +18,7 @@ Other advantages such as lower transaction fees (fewer intermediaries), increase
 
 Our goal is to represent properties as tokens on the Ethereum blockchain. 
 Investors, will be able to join a crowdfund of a real estate and later along the line receive dividends as their property generates income. 
-Income could come from rents, appreciation, and many others. It will be divided evenly amongst the investors depending on how much Wei or Ether they invest.
+Income could come from rents, appreciation, and many others. It will be divided evenly amongst the investors depending on how much Wei or Ether they invest individually.
 
 
 ## Presentation Slide:
