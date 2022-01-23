@@ -1,6 +1,4 @@
-# Project-3
-
-## Tokenizing the Real Estate Market
+# Tokenizing the Real Estate Market
 
 Abstract: 
 
